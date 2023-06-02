@@ -1,28 +1,6 @@
-'use client'
-import Image from 'next/image'
-import React, { useState } from 'react';
-import { BsChatDotsFill } from "react-icons/bs"
-import {redirect} from "next/navigation"
-import getCurrentUser from './actions/getCurrentUser';
- 
-export default async function Home() {
+import React from 'react'
 
-  // const [isChatbotOpen, setIsChatbotOpen] = useState(false);
-
-  // console.log(isChatbotOpen)
-
-  // const toggleChatbot = () => {
-  //   setIsChatbotOpen(!isChatbotOpen)
-  // }
-
-
-
-  const currentUser = await getCurrentUser();
-
-
-  if(!currentUser){
-    redirect('/login');
-  }
+const page = () => {
 
   return (
     <div className="bg-gray-100 min-h-screen">
@@ -70,5 +48,8 @@ export default async function Home() {
       </div> */}
       <button className='bg-[#2898ec] text-white p-4 right-0 bottom-1 absolute rounded-full ' onClick={()=>{}}><BsChatDotsFill size={24} /></button>
     </div>
+
   )
 }
+
+export default page
