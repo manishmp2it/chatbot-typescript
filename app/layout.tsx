@@ -22,7 +22,7 @@ export default function RootLayout({ children, session }: { children: React.Reac
   return (
     <html lang="en">
       <body className={inter.className}>
-        <SessionProvider session={session}>
+        {/* <SessionProvider session={session}> */}
           <div className="flex">
             <Toaster />
             {params === "/login" ? '' : <Sidebar />}
@@ -30,7 +30,7 @@ export default function RootLayout({ children, session }: { children: React.Reac
               {children}
             </div>
           </div>
-        </SessionProvider>
+        {/* </SessionProvider> */}
       </body>
     </html>
   )

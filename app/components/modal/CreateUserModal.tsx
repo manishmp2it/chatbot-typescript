@@ -9,6 +9,9 @@ interface CreateUserModalProps{
 }
 
 const CreateUserModal = ({ isOpen, onClose }:CreateUserModalProps) => {
+
+    console.log(isOpen);
+
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
