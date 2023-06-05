@@ -86,7 +86,7 @@ model Question {
   id                  String   @id @default(auto()) @map("_id") @db.ObjectId
   text                String
   answerable          Int
-  options             String?
+  options             Json?
   priority            Int
   validation_id       Int?
   lead_field          String
