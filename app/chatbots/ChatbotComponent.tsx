@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react'
 import CreateChatbotModal from '../components/modal/CreateChatbotModal';
-import { Chatbot, Company } from '@prisma/client';
+import { Chatbot, Company, Validation } from '@prisma/client';
 import { BiEdit } from 'react-icons/bi';
 
 interface ChatbotComponentProps{
@@ -18,9 +18,11 @@ interface ChatbotComponentProps{
             };
         };
     })[];
+
+    validations:Validation[]
 }
 
-const ChatbotComponent = ({companies,chatbots}:ChatbotComponentProps) => {
+const ChatbotComponent = ({companies,chatbots,validations}:ChatbotComponentProps) => {
 
     const [modalOpen, setModalOpen] = useState(false);
     const [mode,setMode]=useState('');
@@ -29,7 +31,6 @@ const ChatbotComponent = ({companies,chatbots}:ChatbotComponentProps) => {
     const openModal = () => {
         setModalOpen(true);
     };
-
     const closeModal = () => {
         setModalOpen(false);
     };
@@ -140,7 +141,7 @@ const ChatbotComponent = ({companies,chatbots}:ChatbotComponentProps) => {
             >
                 Create Chatbot
             </button>
-            <CreateChatbotModal isOpen={modalOpen} onClose={closeModal} companies={companies} setMode={setMode} mode={mode} chatbot_id={chatbot_id} appData={appData} />
+            <CreateChatbotModal isOpen={modalOpen} onClose={closeModal} companies={companies} setMode={setMode} mode={mode} chatbot_id={chatbot_id} appData={appData} validations={validations} />
             <Table />
         </div>
   )

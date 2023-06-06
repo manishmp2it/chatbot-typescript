@@ -85,15 +85,15 @@ model Chatbot {
 model Question {
   id                  String   @id @default(auto()) @map("_id") @db.ObjectId
   text                String
-  answerable          Int
+  answerable          String
   options             Json?
   priority            Int?
-  validation_id       Int?
+  validation_id       String?   @db.ObjectId
   lead_field          String
   lead_field_priority Int?
   chatbot_id          String   @db.ObjectId
   createdAt           DateTime @default(now())
-  updatedAt           DateTime @updatedAt
+  updatedAt           DateTime @updatedAt 
 
   chatbot Chatbot @relation(fields: [chatbot_id], references: [id])
 }

@@ -26,6 +26,5 @@ export async function POST(request:Request){
         }
     })
 
-    // NextResponse.json();
     return NextResponse.json({});
 }

@@ -19,13 +19,15 @@ export default function RootLayout({ children, session }: { children: React.Reac
 
   const params = usePathname();
 
+  console.log(params);
+
   return (
     <html lang="en">
       <body className={inter.className}>
         {/* <SessionProvider session={session}> */}
           <div className="flex">
             <Toaster />
-            {params === "/login" ? '' : <Sidebar />}
+            {params === "/login" || params==="/unique/user/chatbot" ? '' : <Sidebar />}
             <div className="flex-grow ">
               {children}
             </div>
