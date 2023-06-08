@@ -1,19 +1,20 @@
 import React from 'react';
 import ClientComponent from './ClientComponent';
-import getChatbotdetails from '@/app/actions/getChatbotdetails';
+import getChatbotdetails,{IListingsParams} from '@/app/actions/getChatbotdetails';
+import getAllChatbotQuestion from '@/app/actions/getAllChatbotQuestion';
 
-interface IParams {
-    client_id?: string;
+interface ChatbotProps {
+    searchParams: IListingsParams;
   }
 
-const page = async({ params }: { params: IParams }) => {
+const page = async({searchParams}:ChatbotProps) => {
 
-    console.log(params);
+    const chatbot_detail = await getChatbotdetails(searchParams);
+    const chatbot_questions = await getAllChatbotQuestion(searchParams);
 
-    const chatbot_detail = await getChatbotdetails(params);
 
     return (
-        <ClientComponent  />
+        <ClientComponent chatbot_detail={chatbot_detail} chatbot_questions={chatbot_questions} />
     );
 };
 

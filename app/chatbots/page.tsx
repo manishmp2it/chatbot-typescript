@@ -10,6 +10,8 @@ const page = async () => {
     const chatbots = await getAllChatbots();
     const validations = await getValidations();
 
+   
+
     return (
         <>
             <ChatbotComponent companies={companies} chatbots={chatbots} validations={validations} />

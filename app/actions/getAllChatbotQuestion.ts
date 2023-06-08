@@ -7,19 +7,20 @@ export interface IListingsParams {
   }
   
 
-const getChatbotdetails = async(params: IListingsParams) => {
+const getAllChatbotQuestion = async(params: IListingsParams) => {
 
     try{
 
         const {client_id} = params;
       
 
-        const detail  = await prisma.chatbot.findFirst({
+        const detail  = await prisma.question.findMany({
             where:{
-                secret_key:client_id
-            }
+                chatbot:{
+                    secret_key:client_id
+                },
+            },
         })
-
        
         return detail;
 
@@ -28,4 +29,4 @@ const getChatbotdetails = async(params: IListingsParams) => {
     }
 }
 
-export default getChatbotdetails
+export default getAllChatbotQuestion

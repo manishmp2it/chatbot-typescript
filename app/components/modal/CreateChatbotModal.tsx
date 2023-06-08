@@ -4,7 +4,8 @@ import { useRouter } from 'next/navigation';
 import React, { useCallback, useMemo, useState } from 'react'
 import { toast } from 'react-hot-toast';
 import { Validation } from '@prisma/client';
-import {MdOutlineDeleteOutline} from "react-icons/md"
+import { MdOutlineDeleteOutline } from "react-icons/md"
+import ImageUpload from '../inputs/ImageUpload';
 
 
 interface CreateChatbotModalProps {
@@ -32,7 +33,7 @@ const CreateChatbotModal = ({ isOpen, onClose, companies, mode, setMode, chatbot
     const router = useRouter();
 
     const [name, setName] = useState('');
-    const [image, setImage] = useState(null);
+    const [image, setImage] = useState('');
     const [themeColor, setThemeColor] = useState('#000000');
     const [status, setStatus] = useState('');
     const [selectedDoamin, setSelectedDomain] = useState('');
@@ -105,7 +106,7 @@ const CreateChatbotModal = ({ isOpen, onClose, companies, mode, setMode, chatbot
     const handleCreateChatbot = async (e: any) => {
         e.preventDefault();
 
-        const data = { name, theme_color: themeColor, status, company: selectedDoamin }
+        const data = { name, theme_color: themeColor, status, company: selectedDoamin,image }
 
         await axios.post('/api/chatbot', data)
             .then(() => {
@@ -253,7 +254,7 @@ const CreateChatbotModal = ({ isOpen, onClose, companies, mode, setMode, chatbot
                                                         />
                                                         <button
                                                             type="button"
-                                                            onClick={() => handleRemoveAnswer(index,answerIndex)}
+                                                            onClick={() => handleRemoveAnswer(index, answerIndex)}
                                                             className="ml-2 inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-red-700 hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:w-auto sm:text-sm"
                                                         >
                                                             <MdOutlineDeleteOutline size={20} />
@@ -345,6 +346,10 @@ const CreateChatbotModal = ({ isOpen, onClose, companies, mode, setMode, chatbot
                                             onChange={(e) => setThemeColor(e.target.value)}
                                             className={`w-full px-3 py-2 border  border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500`}
                                         />
+                                    </div>
+                                    <div className="mb-4">
+                                        <ImageUpload onChange={(value:any) => setImage(value)}
+                                            value={image} />
                                     </div>
                                     <div className="mb-4">
                                         <label htmlFor="status" className="block text-gray-700 font-medium mb-2">

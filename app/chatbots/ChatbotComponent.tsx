@@ -3,15 +3,16 @@ import React, { useState } from 'react'
 import CreateChatbotModal from '../components/modal/CreateChatbotModal';
 import { Chatbot, Company, Validation } from '@prisma/client';
 import { BiEdit } from 'react-icons/bi';
+import Image from 'next/image';
 
-interface ChatbotComponentProps{
-    companies:(Company & {
+interface ChatbotComponentProps {
+    companies: (Company & {
         user: {
             name: string | null;
         };
     })[];
 
-    chatbots:(Chatbot & {
+    chatbots: (Chatbot & {
         company: Company & {
             user: {
                 name: string | null;
@@ -19,15 +20,15 @@ interface ChatbotComponentProps{
         };
     })[];
 
-    validations:Validation[]
+    validations: Validation[]
 }
 
-const ChatbotComponent = ({companies,chatbots,validations}:ChatbotComponentProps) => {
+const ChatbotComponent = ({ companies, chatbots, validations }: ChatbotComponentProps) => {
 
     const [modalOpen, setModalOpen] = useState(false);
-    const [mode,setMode]=useState('');
-    const [chatbot_id,setChatbot_id]=useState('');
-    const [appData,setAppData]=useState('');
+    const [mode, setMode] = useState('');
+    const [chatbot_id, setChatbot_id] = useState('');
+    const [appData, setAppData] = useState('');
     const openModal = () => {
         setModalOpen(true);
     };
@@ -35,8 +36,10 @@ const ChatbotComponent = ({companies,chatbots,validations}:ChatbotComponentProps
         setModalOpen(false);
     };
 
+    console.log(chatbots)
+
     const Table = () => {
-       
+
 
         return (
             <div className="bg-white shadow overflow-hidden sm:rounded-lg">
@@ -47,7 +50,7 @@ const ChatbotComponent = ({companies,chatbots,validations}:ChatbotComponentProps
                                 scope="col"
                                 className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                             >
-                                ID 
+                                ID
                             </th>
                             <th
                                 scope="col"
@@ -88,13 +91,15 @@ const ChatbotComponent = ({companies,chatbots,validations}:ChatbotComponentProps
                         </tr>
                     </thead>
                     <tbody className="bg-white divide-y divide-gray-200">
-                        {chatbots.map((row:any, index) => (
+                        {chatbots.map((row: any, index) => (
                             <tr key={index}>
                                 <td className="px-6 py-4 whitespace-nowrap">
-                                    <div className="text-sm font-medium text-gray-900">{index+1}</div>
+                                    <div className="text-sm font-medium text-gray-900">{index + 1}</div>
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap">
-                                    <div className="text-sm text-gray-500"></div>
+                                    <div className="w-9 h-9 rounded-full relative bg-[#fff]">
+                                        {row.image!=null ? <Image src={`${row.image}`} alt='icon' fill/>:''}
+                                    </div>
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap">
                                     <div className="text-sm text-gray-500">{row.name}</div>
@@ -110,8 +115,8 @@ const ChatbotComponent = ({companies,chatbots,validations}:ChatbotComponentProps
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap">
                                     <div className="text-sm text-gray-500">
-                                    <button
-                                            onClick={(any)=>{
+                                        <button
+                                            onClick={(any) => {
                                                 setMode('Edit');
                                                 setChatbot_id(row.id);
                                                 setAppData(row);
@@ -132,8 +137,8 @@ const ChatbotComponent = ({companies,chatbots,validations}:ChatbotComponentProps
         );
     };
 
-  return (
-    <div className="container mx-auto py-4">
+    return (
+        <div className="container mx-auto py-4">
             <h1 className="text-2xl font-bold mb-4">Chatbots Table</h1>
             <button
                 onClick={openModal}
@@ -144,7 +149,7 @@ const ChatbotComponent = ({companies,chatbots,validations}:ChatbotComponentProps
             <CreateChatbotModal isOpen={modalOpen} onClose={closeModal} companies={companies} setMode={setMode} mode={mode} chatbot_id={chatbot_id} appData={appData} validations={validations} />
             <Table />
         </div>
-  )
+    )
 }
 
 export default ChatbotComponent

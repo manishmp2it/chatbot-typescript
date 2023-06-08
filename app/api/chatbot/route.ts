@@ -7,7 +7,7 @@ export async function POST(request:Request){
     const body = await request.json();
   
 
-    const {name,company,theme_color,status}=body;
+    const {name,company,theme_color,status,image}=body;
 
     let token = '';
 
@@ -22,7 +22,8 @@ export async function POST(request:Request){
             company_id:company,
             theme_color,
             status,
-            secret_key:token
+            secret_key:token,
+            image
         }
     })
 
