@@ -98,7 +98,7 @@ const ChatbotComponent = ({ companies, chatbots, validations }: ChatbotComponent
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap">
                                     <div className="w-9 h-9 rounded-full relative bg-[#fff]">
-                                        {row.image!=null ? <Image src={`${row.image}`} alt='icon' fill/>:''}
+                                        {row.image != null ? <Image src={`${row.image}`} alt='icon' fill /> : ''}
                                     </div>
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap">
@@ -139,13 +139,15 @@ const ChatbotComponent = ({ companies, chatbots, validations }: ChatbotComponent
 
     return (
         <div className="container mx-auto py-4">
-            <h1 className="text-2xl font-bold mb-4">Chatbots Table</h1>
-            <button
-                onClick={openModal}
-                className="px-4 py-2 bg-indigo-600 text-white rounded-md shadow-md hover:bg-indigo-700"
-            >
-                Create Chatbot
-            </button>
+            <div className='flex items-center justify-between px-6 py-6'>
+                <h1 className="text-2xl font-bold mb-4 items-center">Chatbots Table</h1>
+                <button
+                    onClick={openModal}
+                    className="px-4 py-2 bg-indigo-600 text-white rounded-md shadow-md hover:bg-indigo-700"
+                >
+                    Create Chatbot
+                </button>
+            </div>
             <CreateChatbotModal isOpen={modalOpen} onClose={closeModal} companies={companies} setMode={setMode} mode={mode} chatbot_id={chatbot_id} appData={appData} validations={validations} />
             <Table />
         </div>

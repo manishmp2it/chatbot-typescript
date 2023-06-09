@@ -99,13 +99,15 @@ const UserComponent = ({users}:UserComponentProps) => {
 
     return (
         <div className="container mx-auto py-4">
-            <h1 className="text-2xl font-bold mb-4">Users Table</h1>
-            <button
-                onClick={openModal}
-                className="px-4 py-2 bg-indigo-600 text-white rounded-md shadow-md hover:bg-indigo-700"
-            >
-                Create User
-            </button>
+            <div className='flex items-center justify-between px-6 py-6'>
+                <h1 className="text-2xl font-bold mb-4 items-center">Users Table</h1>
+                <button
+                    onClick={openModal}
+                    className="px-4 py-2 bg-indigo-600 text-white rounded-md shadow-md hover:bg-indigo-700"
+                >
+                    Create New User
+                </button>
+            </div>
             <CreateUserModal isOpen={modalOpen} onClose={closeModal} />
             <Table />
         </div>

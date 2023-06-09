@@ -32,23 +32,7 @@ const page = () => {
           </div>
         </div>
       </div>
-      {/* <div className='absolute bottom-14 right-0 pb-1 transition'>
-        {isChatbotOpen ? (
-          <Chatbot
-            config={config}
-
-            actionProvider={ActionProvider}
-            headerText='Webhopers Infotech'
-            validator={validateInput}
-            // runInitialMessagesWithHistory
-            messageHistory={loadMessages()}
-            messageParser={MessageParser}
-            // saveMessages={saveMessages}
-          />
-        ) : null}
-
-      </div> */}
-      <button className='bg-[#2898ec] text-white p-4 right-0 bottom-1 absolute rounded-full ' onClick={()=>{}}><BsChatDotsFill size={24} /></button>
+     
     </div>
 
   )

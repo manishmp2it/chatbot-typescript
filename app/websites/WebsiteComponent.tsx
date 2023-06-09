@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import CreateWebsiteModal from '../components/modal/CreateWebsiteModal';
 import { Company, User } from '@prisma/client';
-import {BiEdit} from "react-icons/bi"
+import { BiEdit } from "react-icons/bi"
 
 interface WebsiteComponentProps {
     users: User[];
@@ -79,7 +79,7 @@ const WebsiteComponent = ({ users, companies }: WebsiteComponentProps) => {
                                 <td className="px-6 py-4 whitespace-nowrap">
                                     <div className="text-sm font-medium text-gray-900">
                                         <button
-                                            onClick={()=>{}}
+                                            onClick={() => { }}
                                             className="flex items-center justify-center bg-blue-500 text-white rounded-full p-2 hover:bg-blue-600 focus:outline-none"
                                         >
                                             <BiEdit size={16} />
@@ -96,13 +96,15 @@ const WebsiteComponent = ({ users, companies }: WebsiteComponentProps) => {
 
     return (
         <div className="container mx-auto py-4">
-            <h1 className="text-2xl font-bold mb-4">Websites Table</h1>
-            <button
-                onClick={openModal}
-                className="px-4 py-2 bg-indigo-600 text-white rounded-md shadow-md hover:bg-indigo-700"
-            >
-                Create Website
-            </button>
+            <div className='flex items-center justify-between px-6 py-6'>
+                <h1 className="text-2xl font-bold mb-4 items-center">Website Table</h1>
+                <button
+                    onClick={openModal}
+                    className="px-4 py-2 bg-indigo-600 text-white rounded-md shadow-md hover:bg-indigo-700"
+                >
+                    Create Company
+                </button>
+            </div>
             <CreateWebsiteModal isOpen={modalOpen} onClose={closeModal} users={users} />
             <Table />
         </div>
