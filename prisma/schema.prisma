@@ -100,8 +100,8 @@ model Question {
 
 model Chat {
   id                        String   @id @default(auto()) @map("_id") @db.ObjectId
-  data                      String
-  current_question_priority String
+  data                      Json?
+  current_question_priority Int?
   chat_secret_key           String
   chatbot_id                String   @db.ObjectId
   Chatbot                   Chatbot  @relation(fields: [chatbot_id], references: [id])
@@ -113,7 +113,7 @@ model Chat {
 
 model Lead {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  data      String
+  data      Json?
   chat_id   String   @unique @db.ObjectId
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
