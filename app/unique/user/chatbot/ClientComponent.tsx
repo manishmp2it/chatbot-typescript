@@ -148,9 +148,11 @@ const ClientComponent = ({ chatbot_detail, chatbot_questions }: ClientComponents
 
             await axios.get(`/api/chats?chat_id=${chatId}`)
             .then((response) => {
-                console.log("success")
-                setChatHistory(response?.data?.data)
-                setCurrentQuestionIndex(response?.data?.current_question_priority +1)
+               
+                if(response.data!=null){
+                    setChatHistory(response?.data?.data)
+                    setCurrentQuestionIndex(response?.data?.current_question_priority +1)
+                }
                 console.log(response.data)
 
             })
@@ -188,7 +190,7 @@ const ClientComponent = ({ chatbot_detail, chatbot_questions }: ClientComponents
                         {/* Chat messages */}
                         <div className="flex flex-col space-y-2 my-2 mx-2">
                             {/* Chat message components */}
-                            {chatHistory.map((item: any, index: any) => {
+                            {chatHistory && chatHistory.map((item: any, index: any) => {
 
                                 return (
                                     item.type === "q" ? <div className="flex">
