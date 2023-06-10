@@ -51,6 +51,7 @@ const CreateChatbotModal = ({ isOpen, onClose, companies, mode, setMode, chatbot
             setSelectedDomain(appData?.company_id);
             setThemeColor(appData?.theme_color);
             setStatus(appData?.status)
+            setImage(appData.image)
 
             await axios.get(`/api/question/${chatbot_id}`)
                 .then((response) => {

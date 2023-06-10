@@ -21,8 +21,7 @@ export async function POST(request:Request){
             name,
             company_id:company,
             theme_color,
-            status,
-            secret_key:token,
+            status, 
             image
         }
     })
