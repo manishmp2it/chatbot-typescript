@@ -142,22 +142,29 @@ const ClientComponent = ({ chatbot_detail, chatbot_questions }: ClientComponents
     useEffect(()=>{
         let chatId = localStorage.getItem('chat_id');
 
-        let data={chatId}
-        // const getData =async()=>{
-        //     await axios.get('/api/chats',data)
-        //     .then(() => {
-        //         console.log("success")
-        //     })
-        //     .catch((error) => {
-        //         console.log("error")
-        //     })
-        //     .finally(() => {
-        //         setLoading(false);
-        //     })
-        // }
+        console.log(chatId)
 
-        // getData();
+        const getData =async()=>{
+
+            await axios.get(`/api/chats?chat_id=${chatId}`)
+            .then((response) => {
+                console.log("success")
+                setChatHistory(response?.data?.data)
+                setCurrentQuestionIndex(response?.data?.current_question_priority +1)
+                console.log(response.data)
+
+            })
+            .catch((error) => {
+                console.log("error")
+            })
+            .finally(() => {
+                setLoading(false);
+            })
+        }
+        getData();
     },[])
+
+    console.log(chatHistory)
 
     return (
         <div className="fixed bottom-0 right-0 m-4">

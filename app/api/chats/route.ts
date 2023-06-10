@@ -1,6 +1,6 @@
 import prisma from "@/app/libs/prismadb";
 import { randomBytes } from "crypto";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: Request) {
 
@@ -39,4 +39,20 @@ export async function PUT(request: Request) {
         }
     })
     return NextResponse.json(chat);
+}
+
+export async function GET(request:NextRequest) {
+
+
+    const tag = request.nextUrl.searchParams.get('chat_id')
+
+    console.log(tag);
+
+    const chats = await prisma.chat.findFirst({
+     where:{
+       id:`${tag}`
+     }
+    })
+
+ return NextResponse.json(chats);
 }
