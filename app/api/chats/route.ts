@@ -7,7 +7,7 @@ export async function POST(request: Request) {
     const body = await request.json();
 
 
-    const { current_question_priority, data, chatbot_id } = body;
+    const { current_question_priority, data, chatbot_id, lead_data } = body;
 
     const chat = await prisma.chat.create({
         data: {
@@ -17,6 +17,17 @@ export async function POST(request: Request) {
             chatbot_id
         }
     })
+    let leadData = JSON.stringify(lead_data)
+
+    const lead = await prisma.lead.create({
+        data: {
+            data: leadData,
+            chat_id: chat.id
+        }
+    })
+
+    console.log(lead);
+
     return NextResponse.json(chat);
 }
 
@@ -25,11 +36,11 @@ export async function PUT(request: Request) {
     const body = await request.json();
 
 
-    const { current_question_priority, data, chatbot_id,chat_id } = body;
+    const { current_question_priority, data, chatbot_id, chat_id, lead_data } = body;
 
     const chat = await prisma.chat.update({
-        where:{
-            id:chat_id
+        where: {
+            id: chat_id
         },
         data: {
             chat_secret_key: '',
@@ -38,10 +49,23 @@ export async function PUT(request: Request) {
             chatbot_id
         }
     })
-    return NextResponse.json(chat);
+
+    let leadData = JSON.stringify(lead_data)
+
+    const lead = await prisma.lead.update({
+        where: {
+            chat_id: chat_id
+        },
+        data: {
+            data: leadData,
+            chat_id: chat.id
+        }
+    })
+
+    return NextResponse.json({ chat, lead });
 }
 
-export async function GET(request:NextRequest) {
+export async function GET(request: NextRequest) {
 
 
     const tag = request.nextUrl.searchParams.get('chat_id')
@@ -49,10 +73,12 @@ export async function GET(request:NextRequest) {
     console.log(tag);
 
     const chats = await prisma.chat.findFirst({
-     where:{
-       id:`${tag}`
-     }
+        where: {
+            id: `${tag}`
+        }, include: {
+            lead: true
+        }
     })
 
- return NextResponse.json(chats);
+    return NextResponse.json(chats);
 }

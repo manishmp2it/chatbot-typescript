@@ -2,9 +2,12 @@ import React from 'react'
 import Table from './Table'
 import getCurrentUser from '../actions/getCurrentUser';
 import { redirect } from 'next/navigation';
+import getAllLeads from '../actions/getAllLeads';
 
 const page = async() => {
     const currentUser = await getCurrentUser();
+
+    const leads = await getAllLeads();
    
     if(!currentUser){
         redirect('/login');
@@ -15,7 +18,7 @@ const page = async() => {
                 <h1 className="text-2xl font-bold mb-4 items-center">Leads Table</h1>
                
             </div>
-            <Table />
+            <Table leads={leads}/>
         </div>
     )
 }

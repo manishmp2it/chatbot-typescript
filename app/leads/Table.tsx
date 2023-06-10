@@ -1,6 +1,20 @@
+'use client';
+import { Lead } from '@prisma/client';
 import React from 'react'
 
-const Table = () => {
+interface TableProps{
+    leads:(Lead & {
+        chat: {
+            Chatbot: {
+                name: string;
+            };
+        };
+    })[]
+}
+
+const Table = ({leads}:TableProps) => {
+
+    console.log(leads)
 
     const tableData = [
         { name: 'John Doe', age: 30, email: 'john@example.com' },
@@ -18,34 +32,26 @@ const Table = () => {
                             scope="col"
                             className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                         >
-                            Name
+                            ChatBot
                         </th>
                         <th
                             scope="col"
                             className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                         >
-                            Age
-                        </th>
-                        <th
-                            scope="col"
-                            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                        >
-                            Email
+                            LeadData
                         </th>
                     </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                    {tableData.map((row, index) => (
+                    {leads.map((row, index) => (
                         <tr key={index}>
                             <td className="px-6 py-4 whitespace-nowrap">
-                                <div className="text-sm font-medium text-gray-900">{row.name}</div>
+                                <div className="text-sm font-medium text-gray-900">{row.chat?.Chatbot?.name}</div>
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap">
-                                <div className="text-sm text-gray-500">{row.age}</div>
+                                <div className="text-sm text-gray-900">{JSON.parse(row.data)}</div>
                             </td>
-                            <td className="px-6 py-4 whitespace-nowrap">
-                                <div className="text-sm text-gray-500">{row.email}</div>
-                            </td>
+                            
                         </tr>
                     ))}
                 </tbody>
